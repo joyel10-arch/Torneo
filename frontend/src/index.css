@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   TORNEO — Global CSS Design System
+   Dark editorial sports-tech aesthetic
+   Primary: Midnight Purple (#16051F) | Accent: Neon Magenta (#F500A8)
+   ============================================================ */
+
+@layer base {
+  :root {
+    --color-midnight: #16051F;
+    --color-midnight-light: #1E0B2C;
+    --color-muted: #30203B;
+    --color-muted-dark: #261831;
+    --color-border: #493650;
+    --color-teal-deep: #073B3A;
+    --color-teal-electric: #21E6D1;
+    --color-magenta: #F500A8;
+    --color-text-primary: #F8F5FA;
+    --color-text-secondary: #B9AFC2;
+    --color-success: #21C58E;
+    --color-warning: #F5B942;
+    --color-error: #FF647C;
+    --sidebar-width: 16rem;
+    --sidebar-collapsed: 4rem;
+  }
+
+  * {
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #493650 #16051F;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #16051F;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #493650;
+    border-radius: 3px;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-midnight text-text-primary;
+    min-height: 100vh;
+  }
+
+  h1 { @apply text-3xl font-bold tracking-tight; }
+  h2 { @apply text-2xl font-bold tracking-tight; }
+  h3 { @apply text-xl font-semibold; }
+  h4 { @apply text-lg font-semibold; }
+  h5 { @apply text-base font-semibold; }
+
+  a {
+    @apply text-teal-electric hover:text-teal-electric/80 transition-colors;
+  }
+
+  input, textarea, select {
+    @apply bg-muted-dark border border-muted-border text-text-primary rounded placeholder-text-secondary/50;
+    @apply focus:outline-none focus:ring-1 focus:ring-magenta-neon focus:border-magenta-neon;
+    @apply transition-colors duration-150;
+  }
+
+  input[type="checkbox"] {
+    @apply accent-magenta-neon;
+  }
+}
+
+@layer components {
+  /* ---- Buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded text-sm font-semibold;
+    @apply transition-all duration-150 cursor-pointer select-none;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-midnight;
+    @apply disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-magenta-neon text-white hover:bg-magenta-soft focus:ring-magenta-neon;
+    @apply active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-muted text-text-primary border border-muted-border hover:bg-muted-dark hover:border-magenta-neon/50;
+    @apply focus:ring-muted-border;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-text-secondary hover:bg-muted hover:text-text-primary;
+    @apply focus:ring-muted-border;
+  }
+
+  .btn-teal {
+    @apply btn bg-teal-electric text-midnight font-bold hover:bg-teal-electric/90;
+    @apply focus:ring-teal-electric;
+  }
+
+  .btn-danger {
+    @apply btn bg-status-error text-white hover:bg-status-error/80 focus:ring-status-error;
+  }
+
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+  .btn-lg { @apply px-6 py-3 text-base; }
+
+  /* ---- Cards ---- */
+  .card {
+    @apply bg-muted border border-muted-border rounded-lg;
+    @apply shadow-card;
+  }
+
+  .card-elevated {
+    @apply bg-midnight-light border border-muted-border rounded-lg;
+    @apply shadow-elevated;
+  }
+
+  .card-glass {
+    @apply bg-muted/50 backdrop-blur-sm border border-muted-border/60 rounded-lg;
+  }
+
+  /* ---- Stats & Metrics ---- */
+  .stat-card {
+    @apply card p-5 flex flex-col gap-2;
+  }
+
+  .stat-value {
+    @apply text-3xl font-bold text-text-primary;
+  }
+
+  .stat-label {
+    @apply text-sm text-text-secondary font-medium uppercase tracking-wider;
+  }
+
+  /* ---- Navigation ---- */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded text-sm font-medium;
+    @apply text-text-secondary hover:text-text-primary hover:bg-muted-dark;
+    @apply transition-all duration-150 cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply nav-item bg-magenta-neon/15 text-magenta-neon border-l-2 border-magenta-neon;
+    @apply hover:bg-magenta-neon/20 hover:text-magenta-neon;
+  }
+
+  /* ---- Table ---- */
+  .data-table {
+    @apply w-full text-sm text-left;
+  }
+
+  .data-table th {
+    @apply px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-secondary;
+    @apply border-b border-muted-border bg-muted-dark;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 border-b border-muted-border/50 text-text-primary;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-muted-dark/50;
+  }
+
+  /* ---- Badges ---- */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wide;
+  }
+
+  .badge-magenta { @apply badge bg-magenta-neon/20 text-magenta-neon border border-magenta-neon/30; }
+  .badge-teal { @apply badge bg-teal-electric/15 text-teal-electric border border-teal-electric/30; }
+  .badge-success { @apply badge bg-status-success/15 text-status-success border border-status-success/30; }
+  .badge-warning { @apply badge bg-status-warning/15 text-status-warning border border-status-warning/30; }
+  .badge-error { @apply badge bg-status-error/15 text-status-error border border-status-error/30; }
+  .badge-neutral { @apply badge bg-muted text-text-secondary border border-muted-border; }
+
+  /* ---- Form elements ---- */
+  .form-group { @apply flex flex-col gap-1.5; }
+  .form-label { @apply text-sm font-medium text-text-secondary; }
+  .form-input { @apply w-full px-3 py-2 text-sm rounded; }
+  .form-error { @apply text-xs text-status-error mt-1; }
+  .form-hint { @apply text-xs text-text-secondary; }
+
+  /* ---- Score display ---- */
+  .score-display {
+    @apply flex items-center gap-3 font-bold;
+  }
+
+  .score-value {
+    @apply text-2xl font-black tabular-nums;
+  }
+
+  .score-separator {
+    @apply text-text-secondary text-xl font-bold;
+  }
+
+  /* ---- Bracket match card ---- */
+  .bracket-match {
+    @apply bg-muted border border-muted-border rounded-md w-48 overflow-hidden;
+    @apply hover:border-magenta-neon/50 transition-colors duration-150;
+  }
+
+  .bracket-team {
+    @apply flex items-center justify-between px-3 py-2 border-b border-muted-border/50;
+  }
+
+  .bracket-team:last-child {
+    @apply border-b-0;
+  }
+
+  .bracket-team-winner {
+    @apply bg-magenta-neon/10 text-magenta-neon font-semibold;
+  }
+
+  /* ---- Loading skeleton ---- */
+  .skeleton {
+    @apply bg-muted animate-pulse rounded;
+    background: linear-gradient(90deg, #30203B 25%, #3a2849 50%, #30203B 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* ---- Divider ---- */
+  .divider { @apply border-t border-muted-border; }
+
+  /* ---- Page header ---- */
+  .page-header {
+    @apply flex items-start justify-between mb-6 gap-4;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-text-primary tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-text-secondary mt-1;
+  }
+
+  /* ---- Empty state ---- */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-16 text-center;
+  }
+
+  /* ---- Match status indicator ---- */
+  .match-status-dot {
+    @apply w-2 h-2 rounded-full inline-block;
+  }
+
+  /* ---- DSA step ---- */
+  .dsa-step {
+    @apply bg-muted-dark border border-muted-border rounded p-3 text-sm;
+  }
+
+  .dsa-step-active {
+    @apply bg-magenta-neon/10 border-magenta-neon/50 text-magenta-neon;
+  }
+
+  /* ---- Accent line ---- */
+  .accent-border-l {
+    @apply border-l-4 border-magenta-neon pl-4;
+  }
+
+  /* ---- Tooltip ---- */
+  .tooltip {
+    @apply absolute z-50 px-2 py-1 text-xs text-white bg-muted-dark border border-muted-border rounded;
+    @apply pointer-events-none whitespace-nowrap shadow-elevated;
+  }
+}
+
+@layer utilities {
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #F500A8, #21E6D1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-purple {
+    background: linear-gradient(135deg, #F4EFF7, #B9AFC2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .surface-gradient {
+    background: linear-gradient(135deg, #16051F 0%, #073B3A 100%);
+  }
+
+  /* animate-fade-in and animate-slide-in are defined as Tailwind keyframes in tailwind.config.js */
+
+  .line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+  .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .glow-magenta { box-shadow: 0 0 16px rgba(245, 0, 168, 0.35); }
+  .glow-teal { box-shadow: 0 0 16px rgba(33, 230, 209, 0.25); }
+
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+}
+
+/* ---- React Flow tournament bracket overrides ---- */
+.react-flow {
+  background: #16051F !important;
+}
+
+.react-flow__edge-path {
+  stroke: #493650 !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__node {
+  font-family: 'Inter', sans-serif;
+}
+
+.react-flow__background {
+  background: #16051F !important;
+}
+
+.react-flow__minimap {
+  background: #1E0B2C !important;
+  border: 1px solid #493650;
+  border-radius: 6px;
+}
+
+.react-flow__controls button {
+  background: #30203B !important;
+  border-color: #493650 !important;
+  color: #B9AFC2 !important;
+}
+
+.react-flow__controls button:hover {
+  background: #3a2849 !important;
+}
+
+/* ---- Recharts overrides ---- */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #30203B !important;
+  border: 1px solid #493650 !important;
+  border-radius: 6px !important;
+  color: #F8F5FA !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: #493650 !important;
+  stroke-opacity: 0.4 !important;
+}
+
+/* ---- Page transition ---- */
+.page-enter { animation: fadeIn 0.2s ease-out; }
